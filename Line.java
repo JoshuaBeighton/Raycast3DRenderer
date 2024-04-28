@@ -45,8 +45,8 @@ public class Line {
         try {
             Matrix m1Inv = m1.getInverse();
             double v1theta = m1Inv.a * diff.x + m1Inv.b * diff.y;
-            double v2theta = m1Inv.c * diff.y + m1Inv.d * diff.y;
-            if (Math.abs((v1theta * v1zDirection) + (v2theta * v2zDirection) - diff.z) < lineWidth){
+            double v2theta = m1Inv.c * diff.x + m1Inv.d * diff.y;
+            if (Math.abs((v1theta * v1zDirection) - (v2theta * v2zDirection) - diff.z) < lineWidth){
                 if (Math.abs(v2theta) <= 1){
                     return v1theta;
                 }
