@@ -19,4 +19,10 @@ public class Vertex {
         double zDiff = z - v.z;
         return Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2) + Math.pow(zDiff, 2));
     }
+
+
+    @Override
+    public String toString() {
+        return "x: " + x + ", y: " + y + ", z: " + z;
+    }
 }

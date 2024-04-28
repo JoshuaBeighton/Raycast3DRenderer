@@ -25,13 +25,18 @@ public class Line {
     public double getTheta(Line l) throws NoIntersectionException {
         Vertex diff = Vertex.subtract(intercept, l.intercept);
 
+        double lineWidth = .2;
+
         double v1xCoefficient = this.direction.x;
         double v1yCoefficient = this.direction.y;
         double v1zCoefficient = this.direction.z;
 
+
         double v2xCoefficient = l.direction.x;
         double v2yCoefficient = l.direction.y;
         double v2zCoefficient = l.direction.z;
+
+        Vertex pointOfCollision;
 
         Matrix m1 = new Matrix(v1xCoefficient, v2xCoefficient, v1yCoefficient, v2yCoefficient);
         Matrix m2 = new Matrix(v1xCoefficient, v2xCoefficient, v1zCoefficient, v2zCoefficient);
@@ -41,39 +46,47 @@ public class Line {
             Matrix m1Inv = m1.getInverse();
             double v1theta = m1Inv.a * diff.x + m1Inv.b * diff.y;
             double v2theta = m1Inv.a * diff.x + m1Inv.b * diff.y;
-
-            if (v1theta * v1zCoefficient + v2theta * v2zCoefficient == diff.z){
-                return v1theta;
+            if (Math.abs((v1theta * v1zCoefficient) + (v2theta * v2zCoefficient) - diff.z) < lineWidth){
+                if (v2theta <=0){
+                    return v1theta;
+                }
+                
             }
             else{
                 throw new NoIntersectionException();
             }
         } catch (ArithmeticException e) {
+            e.printStackTrace();
         }
         try {
             Matrix m2Inv = m2.getInverse();
             double v1theta = m2Inv.a * diff.x + m2Inv.b * diff.z;
             double v2theta = m2Inv.a * diff.x + m2Inv.b * diff.z;
-
-            if (v1theta * v1yCoefficient + v2theta * v2yCoefficient == diff.y){
-                return v1theta;
+            if (Math.abs(v1theta * v1yCoefficient + v2theta * v2yCoefficient - diff.y) < lineWidth){
+                if (v2theta <= 0){
+                    return v1theta;
+                }
             }
             else{
                 throw new NoIntersectionException();
             }
         } catch (ArithmeticException e) {
+            e.printStackTrace();
         }
         try {
             Matrix m3Inv = m3.getInverse();
             double v1theta = m3Inv.a * diff.y + m3Inv.b * diff.z;
             double v2theta = m3Inv.a * diff.y + m3Inv.b * diff.z;
-            if (v1theta * v1xCoefficient + v2theta * v2xCoefficient == diff.x){
-                return v1theta;
+            if (Math.abs(v1theta * v1xCoefficient + v2theta * v2xCoefficient - diff.x) < lineWidth){
+                if (v2theta <= 0){
+                    return v1theta;
+                }
             }
             else{
                 throw new NoIntersectionException();
             }
         } catch (ArithmeticException e) {
+            e.printStackTrace();
         }
         return 0;
     }

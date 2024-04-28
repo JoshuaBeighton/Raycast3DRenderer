@@ -9,7 +9,7 @@ public class Renderer extends JFrame {
     private final int width = 500;
     private final int height = 500;
     private Cube c;
-
+    private GraphicsPanel graphicsPanel;
     public Renderer(Cube c) {
         super();
         setSize(width, height);
@@ -17,15 +17,18 @@ public class Renderer extends JFrame {
         getContentPane().setBackground(Color.BLACK);
         initialiseCamera();
         this.c = c;
+        graphicsPanel = new GraphicsPanel(getDistances());
+        graphicsPanel.setBounds(0,0,width, height);
+        add(graphicsPanel);
         repaint();
     }
 
     private void initialiseCamera() {
         cameraTerminator = new Vertex(0, 0, 5);
-        double z = 5;
+        double z = 3;
 
         double minX = -3;
-        double maxX = minX * 1;
+        double maxX = minX * -1;
         double minY = -3;
         double maxY = minY * -1;
 
@@ -43,20 +46,23 @@ public class Renderer extends JFrame {
 
     @Override
     public void paint(Graphics g){
-        g.setColor(Color.black);
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                try{
-                    double distance = pixelOnCube(cameraScreen[i][j], c);
-                    System.out.println(distance);
-                    g.setColor(new Color((int) distance));
-                    g.fillRect(j, i, 1, 1);
-                }
-                catch (Exception e){
+        if (graphicsPanel != null)
+        graphicsPanel.paintComponent(g);
+    }
 
+    private Double[][] getDistances(){
+        Double[][] distances = new Double[height][width];
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                try {
+                    double distance = pixelOnCube(cameraScreen[i][j], c);
+                    distances[i][j] = 1 / distance;
+                } catch (Exception e) {
+                    distances[i][j] = (double)0;
                 }
             }
         }
+        return distances;
     }
 
     private double pixelOnCube(Vertex pixel, Cube c) throws NoIntersectionException {

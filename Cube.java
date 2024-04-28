@@ -17,11 +17,9 @@ public class Cube {
     private List<Line> generateLines() {
         ArrayList<Line> lines = new ArrayList<>();
         for (int i = 0; i < vertices.size() - 1; i++) {
-            System.out.println("New Starting Index");
             for (int j = i + 1; j < vertices.size(); j++) {
                 if (vertices.get(i).getDistance(vertices.get(j)) == 2){
                     Line l = new Line(vertices.get(i), vertices.get(j));
-                    System.out.println(l.toString());
                     lines.add(l);
                 }
             }
