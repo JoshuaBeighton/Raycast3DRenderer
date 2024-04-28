@@ -10,7 +10,10 @@ public class Vertex {
     }
 
     public static Vertex subtract(Vertex v1, Vertex v2) {
-        return new Vertex(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+        double x = v1.x - v2.x;
+        double y = v1.y - v2.y;
+        double z = v1.z - v2.z;
+        return new Vertex(x,y,z);
     }
 
     public double getDistance(Vertex v) {

@@ -21,9 +21,13 @@ public class GraphicsPanel extends JPanel {
                         brightness = 255;
                     }
                     if (brightness !=0){
+                        g.setColor(new Color(100 + (brightness/3),(brightness /3),brightness));
+                    }
+                    else{
+                        g.setColor(Color.black);
                     }
                     
-                    g.setColor(new Color(brightness));
+                    
                     g.fillRect(j, i, 1, 1);
                 }
                 catch (Exception e){

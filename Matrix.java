@@ -10,15 +10,15 @@ public class Matrix {
         this.d = d;
     }
     public double getDeterminant(){
-        return a * d - b * c;
+        return (a * d) - (b * c);
     }
 
     public Matrix getInverse(){
         double det = getDeterminant();
         double a = this.d / det;
-        double b = -1 * this.b /det;
-        double c = -1 * this.c /det;
-        double d = this.a /det;
+        double b = -1 * this.b / det;
+        double c = -1 * this.c / det;
+        double d = this.a / det;
 
         return new Matrix(a, b, c, d);
     }

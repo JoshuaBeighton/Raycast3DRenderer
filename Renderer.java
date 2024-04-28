@@ -71,7 +71,7 @@ public class Renderer extends JFrame {
             try {
                 double theta = lineInsideCamera.getTheta(l);
                 return theta;
-            } catch (Exception e) {
+            } catch (NoIntersectionException e) {
             }
         }
         throw new NoIntersectionException();

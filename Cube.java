@@ -18,10 +18,12 @@ public class Cube {
         ArrayList<Line> lines = new ArrayList<>();
         for (int i = 0; i < vertices.size() - 1; i++) {
             for (int j = i + 1; j < vertices.size(); j++) {
-                if (vertices.get(i).getDistance(vertices.get(j)) == 2){
-                    Line l = new Line(vertices.get(i), vertices.get(j));
-                    lines.add(l);
-                }
+                //if (vertices.get(i).getDistance(vertices.get(j)) == 2){
+                //    Line l = new Line(vertices.get(i), vertices.get(j));
+                //    lines.add(l);
+                //}
+                Line l = new Line(vertices.get(i), vertices.get(j));
+                lines.add(l);
             }
         }
         return lines;
